@@ -48,8 +48,6 @@ playground.xcworkspace
 
 # CocoaPods
 Pods/
-*.xcworkspace
-!default.xcworkspace
 
 # Carthage
 Carthage/Build/
