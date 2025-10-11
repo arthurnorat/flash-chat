@@ -13,7 +13,7 @@ import AmplifyPlugins
 struct FlashChatApp: App {
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
+			WelcomeView()
 		}
 	}
 	
