@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BC19978E7428A942FDD7482 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */; };
 		5C3D75D3B28AE0B918849801 /* Pods_FlashChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 630619EDE233B2BA5E07274F /* Pods_FlashChat.framework */; };
+		AF004C3D57D61611BEF53A20 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */; };
+		E0F86B452E9A874800BFD275 /* CLAUDE.md in Resources */ = {isa = PBXBuildFile; fileRef = E0F86B442E9A874800BFD275 /* CLAUDE.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = awsconfiguration.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		32749E07EAE4B2F230FE1464 /* Pods-FlashChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashChat.debug.xcconfig"; path = "Target Support Files/Pods-FlashChat/Pods-FlashChat.debug.xcconfig"; sourceTree = "<group>"; };
 		630619EDE233B2BA5E07274F /* Pods_FlashChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlashChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30BBED59C71B54767BE1857 /* Pods-FlashChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashChat.release.xcconfig"; path = "Target Support Files/Pods-FlashChat/Pods-FlashChat.release.xcconfig"; sourceTree = "<group>"; };
+		D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		E0EB2E382E96FC57008FFDCC /* FlashChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0F86B442E9A874800BFD275 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		053E4B4E7A0791E989A8D850 /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */,
+				D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			sourceTree = "<group>";
+		};
 		B897634FBE947944D787E50F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +76,8 @@
 				E0EB2E392E96FC57008FFDCC /* Products */,
 				C5F848DD75B4A4DBE4635526 /* Pods */,
 				B897634FBE947944D787E50F /* Frameworks */,
+				E0F86B442E9A874800BFD275 /* CLAUDE.md */,
+				053E4B4E7A0791E989A8D850 /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +153,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0F86B452E9A874800BFD275 /* CLAUDE.md in Resources */,
+				AF004C3D57D61611BEF53A20 /* awsconfiguration.json in Resources */,
+				1BC19978E7428A942FDD7482 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
