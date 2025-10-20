@@ -23,26 +23,25 @@ struct WelcomeView: View {
 			Spacer()
 			
 			// Register button
-			Button("Register") {
-				// TODO: - Navigate to RegisterView
+			NavigationLink(destination: RegisterView()) {
+				Text("Register")
+					.font(.system(size: 30))
+					.foregroundColor(Color(K.BrandColors.blue))
+					.frame(height: 48)
+					.frame(maxWidth: .infinity)
+					.background(Color(K.BrandColors.lightBlue))
 			}
-			.font(.system(size: 30))
-			.foregroundColor(Color(K.BrandColors.blue))
-			.frame(height: 48)
-			.frame(maxWidth: .infinity)
-			.background(Color(K.BrandColors.lightBlue))
-			
 			
 			// Login button
-			Button("Log In") {
-				// TODO: - Navigate to LoginView
+			NavigationLink(destination: LoginView()) {
+				Text("Log In")
+					.font(.system(size: 30))
+					.foregroundColor(.white)
+					.frame(height: 48)
+					.frame(maxWidth: .infinity)
+					.background(Color.teal)
+					.clipShape(Rectangle())
 			}
-			.font(.system(size: 30))
-			.foregroundColor(.white)
-			.frame(height: 48)
-			.frame(maxWidth: .infinity)
-			.background(Color.teal)
-			.clipShape(Rectangle())
         }
 		.padding(.horizontal, 0)
 		.onAppear {
