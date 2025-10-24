@@ -11,6 +11,7 @@ struct RegisterView: View {
 	
 	@StateObject private var viewModel = RegisterViewModel()
 	@State private var navigateToChatView: Bool = false
+	@State private var showConfirmationAlert: Bool = false
 	
     var body: some View {
 		VStack(spacing: 20) {
@@ -62,6 +63,22 @@ struct RegisterView: View {
 			if isSuccessful {
 				navigateToChatView = true
 			}
+		}
+		.onChange(of: viewModel.needsConfirmation) { needsConfirmation in
+			if needsConfirmation {
+				showConfirmationAlert = true
+			}
+		}
+		.alert("Confirm your email", isPresented: $showConfirmationAlert) {
+			TextField("6-digit code", text: $viewModel.confirmationCode)
+				.textInputAutocapitalization(.never)
+				.keyboardType(.numberPad)
+			Button("Confirm") {
+				viewModel.confirmSignUp()
+			}
+			Button("Cancel", role: .cancel) { }
+		} message: {
+			Text("Enter the confirmation code sent to your email")
 		}
     }
 }

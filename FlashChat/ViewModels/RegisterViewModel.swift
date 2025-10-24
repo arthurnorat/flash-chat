@@ -17,6 +17,8 @@ class RegisterViewModel: ObservableObject {
 //	@Published var isLoading: Bool = false TODO: - Implement loading state
 	@Published var errorMessage: String?
 	@Published var isRegistrationSuccessful: Bool = false
+	@Published var needsConfirmation: Bool = false
+	@Published var confirmationCode: String = ""
 	
 	// MARK: Registration Logic
 	
@@ -27,8 +29,8 @@ class RegisterViewModel: ObservableObject {
 			return
 		}
 
-		guard password.count >= 6 else {
-			errorMessage = "Password must be at least 6 characters long."
+		guard password.count >= 8 else {
+			errorMessage = "Password must be at least 8 characters long."
 			return
 		}
 
@@ -61,6 +63,28 @@ class RegisterViewModel: ObservableObject {
 		}
 	}
 	
+	func confirmSignUp() {
+		guard !confirmationCode.isEmpty else {
+			errorMessage = "Insert your 6 digits confirmation code"
+			return
+		}
+		
+		Amplify.Auth.confirmSignUp(for: email, confirmationCode: confirmationCode) { [weak self] result in
+			DispatchQueue.main.async {
+				guard let self = self else { return }
+				
+				switch result {
+				case .success(let confirmResult):
+					self.isRegistrationSuccessful = true
+					
+				case .failure(let error):
+					self.handleAuthError(error)
+				}
+				
+			}
+		}
+	}
+	
 	// MARK: Private Helper Methods
 	private func handleSignUpResult(_ signUpResult: AuthSignUpResult) {
 		switch signUpResult.nextStep {
@@ -68,6 +92,7 @@ class RegisterViewModel: ObservableObject {
 			// Cognito sent confirmation code via email
 			errorMessage = "Please confirm your account via \(deliveryDetails?.destination)."
 			print("Code sent to \(deliveryDetails)")
+			needsConfirmation = true
 
 		case .done:
 			isRegistrationSuccessful = true
