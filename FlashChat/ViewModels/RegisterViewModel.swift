@@ -43,24 +43,18 @@ class RegisterViewModel: ObservableObject {
 		let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
 
 		// 4. Call Amplify Auth
-		Amplify.Auth.signUp(username: email, password: password, options: options) { [weak self] result in
-			// 5. Return to main thread to update UI
-			DispatchQueue.main.async {
-				guard let self = self else { return }
-
-				// 6. Stop loading
-//				self.isLoading = false
-
-				// 7. Handle the result
-				switch result {
-				case .success(let signUpResult):
-					self.handleSignUpResult(signUpResult)
-
-				case .failure(let error):
-					self.handleAuthError(error)
-				}
-			}
-		}
+		Task {
+			  do {
+				  let result = try await Amplify.Auth.signUp(username: email, password: password, options: options)
+				  await MainActor.run {
+					  handleSignUpResult(result)
+				  }
+			  } catch let error as AuthError {
+				  await MainActor.run {
+					  handleAuthError(error)
+				  }
+			  }
+		  }
 	}
 	
 	func confirmSignUp() {
@@ -69,26 +63,24 @@ class RegisterViewModel: ObservableObject {
 			return
 		}
 		
-		Amplify.Auth.confirmSignUp(for: email, confirmationCode: confirmationCode) { [weak self] result in
-			DispatchQueue.main.async {
-				guard let self = self else { return }
-				
-				switch result {
-				case .success(let confirmResult):
-					self.isRegistrationSuccessful = true
-					
-				case .failure(let error):
-					self.handleAuthError(error)
-				}
-				
-			}
-		}
+		Task {
+			  do {
+				  _ = try await Amplify.Auth.confirmSignUp(for: email, confirmationCode: confirmationCode)
+				  await MainActor.run {
+					  isRegistrationSuccessful = true
+				  }
+			  } catch let error as AuthError {
+				  await MainActor.run {
+					  handleAuthError(error)
+				  }
+			  }
+		  }
 	}
 	
 	// MARK: Private Helper Methods
 	private func handleSignUpResult(_ signUpResult: AuthSignUpResult) {
 		switch signUpResult.nextStep {
-		case .confirmUser(let deliveryDetails, _):
+		case .confirmUser(let deliveryDetails, _, _):
 			// Cognito sent confirmation code via email
 			errorMessage = "Please confirm your account via \(deliveryDetails?.destination)."
 			print("Code sent to \(deliveryDetails)")

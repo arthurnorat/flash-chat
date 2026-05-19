@@ -9,18 +9,16 @@
 /* Begin PBXBuildFile section */
 		1BC19978E7428A942FDD7482 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */; };
 		AF004C3D57D61611BEF53A20 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */; };
-		D0956D8017B0313AF8EF5C6F /* Pods_FlashChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56D18F9D8A37303C526AF5D /* Pods_FlashChat.framework */; };
+		E0AF32A22FBCD47F00C13D1F /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = E0AF32A12FBCD47F00C13D1F /* AWSCognitoAuthPlugin */; };
+		E0AF32A42FBCD47F00C13D1F /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = E0AF32A32FBCD47F00C13D1F /* Amplify */; };
 		E0F86B452E9A874800BFD275 /* CLAUDE.md in Resources */ = {isa = PBXBuildFile; fileRef = E0F86B442E9A874800BFD275 /* CLAUDE.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		323B1A17DD18B5CCA01DE29B /* Pods-FlashChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashChat.release.xcconfig"; path = "Target Support Files/Pods-FlashChat/Pods-FlashChat.release.xcconfig"; sourceTree = "<group>"; };
-		55B386CC18FBB879758847F7 /* Pods-FlashChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlashChat.debug.xcconfig"; path = "Target Support Files/Pods-FlashChat/Pods-FlashChat.debug.xcconfig"; sourceTree = "<group>"; };
 		D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		E0EB2E382E96FC57008FFDCC /* FlashChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F86B442E9A874800BFD275 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
-		E56D18F9D8A37303C526AF5D /* Pods_FlashChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlashChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -36,7 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0956D8017B0313AF8EF5C6F /* Pods_FlashChat.framework in Frameworks */,
+				E0AF32A22FBCD47F00C13D1F /* AWSCognitoAuthPlugin in Frameworks */,
+				E0AF32A42FBCD47F00C13D1F /* Amplify in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,32 +51,13 @@
 			name = AmplifyConfig;
 			sourceTree = "<group>";
 		};
-		43F2DD851F35279C2EF3F28D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E56D18F9D8A37303C526AF5D /* Pods_FlashChat.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C5F848DD75B4A4DBE4635526 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				55B386CC18FBB879758847F7 /* Pods-FlashChat.debug.xcconfig */,
-				323B1A17DD18B5CCA01DE29B /* Pods-FlashChat.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		E0EB2E2F2E96FC57008FFDCC = {
 			isa = PBXGroup;
 			children = (
 				E0EB2E3A2E96FC57008FFDCC /* FlashChat */,
 				E0EB2E392E96FC57008FFDCC /* Products */,
-				C5F848DD75B4A4DBE4635526 /* Pods */,
 				E0F86B442E9A874800BFD275 /* CLAUDE.md */,
 				053E4B4E7A0791E989A8D850 /* AmplifyConfig */,
-				43F2DD851F35279C2EF3F28D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,11 +76,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0EB2E432E96FC5A008FFDCC /* Build configuration list for PBXNativeTarget "FlashChat" */;
 			buildPhases = (
-				B957BF4676D3020B4517009A /* [CP] Check Pods Manifest.lock */,
 				E0EB2E342E96FC57008FFDCC /* Sources */,
 				E0EB2E352E96FC57008FFDCC /* Frameworks */,
 				E0EB2E362E96FC57008FFDCC /* Resources */,
-				4E6FE09490ACF1D02013F473 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,7 +100,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					E0EB2E372E96FC57008FFDCC = {
 						CreatedOnToolsVersion = 26.0.1;
@@ -138,6 +116,9 @@
 			);
 			mainGroup = E0EB2E2F2E96FC57008FFDCC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E0AF32A02FBCD47F00C13D1F /* XCRemoteSwiftPackageReference "amplify-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E0EB2E392E96FC57008FFDCC /* Products */;
 			projectDirPath = "";
@@ -160,52 +141,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4E6FE09490ACF1D02013F473 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FlashChat/Pods-FlashChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FlashChat/Pods-FlashChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlashChat/Pods-FlashChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B957BF4676D3020B4517009A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FlashChat-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E0EB2E342E96FC57008FFDCC /* Sources */ = {
@@ -271,12 +206,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -329,11 +265,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -341,7 +278,6 @@
 		};
 		E0EB2E442E96FC5A008FFDCC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55B386CC18FBB879758847F7 /* Pods-FlashChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -380,7 +316,6 @@
 		};
 		E0EB2E452E96FC5A008FFDCC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 323B1A17DD18B5CCA01DE29B /* Pods-FlashChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -439,6 +374,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E0AF32A02FBCD47F00C13D1F /* XCRemoteSwiftPackageReference "amplify-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.58.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E0AF32A12FBCD47F00C13D1F /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0AF32A02FBCD47F00C13D1F /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = AWSCognitoAuthPlugin;
+		};
+		E0AF32A32FBCD47F00C13D1F /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0AF32A02FBCD47F00C13D1F /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = Amplify;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E0EB2E302E96FC57008FFDCC /* Project object */;
 }
