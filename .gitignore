@@ -65,7 +65,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 # AWS Amplify
-amplify/
+/amplify/
 amplifyconfiguration.json
 awsconfiguration.json
 .amplifyrc
