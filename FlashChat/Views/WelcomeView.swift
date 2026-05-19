@@ -11,18 +11,21 @@ struct WelcomeView: View {
 	
 	@StateObject private var viewModel = WelcomeViewModel()
 	
-    var body: some View {
+	var body: some View {
 		VStack {
 			
 			Spacer()
 			
-            Text(viewModel.titleText) // Title animation
-				.font(.system(size: 50, weight: .black))
-				.foregroundColor(Color(K.BrandColors.blue))
-			
+			HStack {
+				Image(systemName: "bolt.fill")
+					  .font(.system(size: 40))
+					  .foregroundColor(Color(K.BrandColors.blue))
+				Text(viewModel.titleText)
+					.font(.system(size: 50, weight: .black))
+					.foregroundColor(Color(K.BrandColors.blue))
+			}
 			Spacer()
 			
-			// Register button
 			NavigationLink(destination: RegisterView()) {
 				Text("Register")
 					.font(.system(size: 30))
@@ -30,9 +33,8 @@ struct WelcomeView: View {
 					.frame(height: 48)
 					.frame(maxWidth: .infinity)
 					.background(Color(K.BrandColors.lightBlue))
-			}
+			}			
 			
-			// Login button
 			NavigationLink(destination: LoginView()) {
 				Text("Log In")
 					.font(.system(size: 30))
@@ -42,14 +44,14 @@ struct WelcomeView: View {
 					.background(Color.teal)
 					.clipShape(Rectangle())
 			}
-        }
+		}
 		.padding(.horizontal, 0)
 		.onAppear {
 			viewModel.animateTitle()
 		}
-    }
+	}
 }
 
 #Preview {
-    WelcomeView()
+	WelcomeView()
 }

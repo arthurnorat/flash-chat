@@ -9,7 +9,7 @@ import Foundation
 
 struct K {
 
-	static let appName = "⚡️FlashChat"
+	static let appName = "FlashChat"
 	static let cellIdentifier = "ReusableCell"
 	static let cellNibName = "MessageCell"
 	static let leftImageView = "YouAvatar"
