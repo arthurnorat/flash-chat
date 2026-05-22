@@ -17,6 +17,7 @@
 /* Begin PBXFileReference section */
 		2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		E0AAC11B2FC1060000501728 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E0EB2E382E96FC57008FFDCC /* FlashChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F86B442E9A874800BFD275 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +58,7 @@
 				E0EB2E3A2E96FC57008FFDCC /* FlashChat */,
 				E0EB2E392E96FC57008FFDCC /* Products */,
 				E0F86B442E9A874800BFD275 /* CLAUDE.md */,
+				E0AAC11B2FC1060000501728 /* README.md */,
 				053E4B4E7A0791E989A8D850 /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
