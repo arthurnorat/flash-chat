@@ -299,6 +299,33 @@ O **FlashChat** é uma conversão do projeto Flash-Chat (UIKit + Firebase) para 
     - Tratamento de erro funciona (código inválido, expirado, etc.)
     - UX melhorada com teclado numérico
 
+### Implementação de LoginViewModel e LoginView (20/05/2026)
+62. ✅ Criado `LoginViewModel.swift` em `/ViewModels`
+    - Mesma estrutura do `RegisterViewModel`: `ObservableObject` + `@Published` properties
+    - `signIn()`: validação de campos + `Task { async/await }` + `await MainActor.run {}`
+    - `handleSignInResult()`: trata `.done` (navega), `.confirmSignUp` (pede confirmação), `@unknown default`
+    - `handleAuthError()`: trata `NotAuthorizedException`, `UserNotFoundException`, `.notAuthorized`, `.validation` e `default`
+63. ✅ Atualizada `LoginView.swift` com `LoginViewModel`
+    - `@State` locais de email/senha removidos; adicionado `@StateObject private var viewModel = LoginViewModel()`
+    - Bindings: `$viewModel.email` e `$viewModel.password`
+    - Botão chama `viewModel.signIn()`
+    - Exibe `errorMessage` em vermelho abaixo do botão
+    - Navegação assíncrona via `.navigationDestination` + `.onChange` (API correta iOS 16+ com dois parâmetros)
+64. ✅ Testado fluxo de login
+    - Login com credenciais válidas → navega para ChatView ✅
+    - Campos vazios → "Email and password cannot be empty." ✅
+    - Senha errada → exibe "Unexpected error: Amplify.AuthError error 5" ❌ (bug identificado)
+65. 🔍 Diagnóstico do erro — `AuthError.invalidState` no login
+    - **Erro no console**: "There is already a user in signedIn state. SignOut the user first before calling signIn"
+    - **Causa**: após registro + confirmação por email, o Amplify faz login automático. A sessão persiste,
+      mas o app sempre exibe a WelcomeView ao inicializar, sem verificar se já existe usuário autenticado.
+      Tentando fazer login novamente, o Cognito rejeita com `.invalidState` — que não estava mapeado
+      no `handleAuthError`, por isso caía no `default` com a mensagem genérica "error 5"
+    - **Dois problemas identificados**:
+      1. `LoginViewModel.handleAuthError()` não trata o caso `.invalidState`
+      2. O app não verifica sessão ativa ao inicializar — sempre mostra WelcomeView independente do estado
+    - **Próxima tarefa**: implementar verificação de sessão (ver Parte 2.5 no plano)
+
 ### Migração Amplify Gen 2 + CocoaPods → SPM (19/05/2026)
 49. ✅ Criado backend Gen 2 com `npm create amplify@latest -- --dirName amplify-gen2`
     - Pasta `amplify-gen2/` criada com TypeScript backend
@@ -341,33 +368,44 @@ O **FlashChat** é uma conversão do projeto Flash-Chat (UIKit + Firebase) para 
     - Registro → código por email → Alert → confirmação → ChatView ✅
 61. ✅ Commits e push realizados
 
+### Gerenciamento de Sessão e Refatoração (22/05/2026)
+66. ✅ Implementado signOut automático ao ir para background (`FlashChatApp.swift`)
+    - Solução escolhida: encerrar sessão toda vez que app vai para background
+    - `@Environment(\.scenePhase) var scenePhase` adicionado à struct `FlashChatApp`
+    - `.onChange(of: scenePhase)` no `WindowGroup` detecta `.background` e chama `Amplify.Auth.signOut()`
+    - **Motivo**: mais simples que verificar sessão ao inicializar — resolve o `AuthError.invalidState` sem complexidade extra
+    - Testado: login → home → reabrir → login novamente → funciona ✅
+67. ✅ Renomeado `FStore` → `Messages` em `Constants.swift`
+    - `collectionName` renomeado para `modelName` (terminologia AppSync/GraphQL)
+    - **Motivo**: nome anterior referenciava tecnologia (Firestore); novo nome é agnóstico e descreve o domínio
+    - Nenhum arquivo usava `K.FStore` ainda — renomeação sem impacto
+
 ---
 
-## 📋 Plano de Desenvolvimento (atualizado em 19/05/2026)
+## 📋 Plano de Desenvolvimento (atualizado em 22/05/2026)
 
 ### PARTE 1 — Migração Amplify Gen 1 → Gen 2 ✅ CONCLUÍDA
 
 ---
 
-### PARTE 2 — LoginViewModel
+### PARTE 2 — LoginViewModel ✅ CONCLUÍDA
 
-**Etapa 2.1 — Criar `LoginViewModel.swift`**
-- [ ] `ObservableObject` com `@Published`: `email`, `password`, `errorMessage`, `isLoginSuccessful`
-- [ ] Função `signIn()` com `Amplify.Auth.signIn(username:password:)` em `async/await`
-- [ ] Tratar resultado `.done` → `isLoginSuccessful = true`
-- [ ] Tratar erros: usuário não encontrado, senha incorreta, usuário não confirmado
+- [x] `LoginViewModel.swift` criado com `signIn()`, `handleSignInResult()` e `handleAuthError()`
+- [x] `LoginView.swift` conectada ao ViewModel com bindings, erro e navegação assíncrona
+- Login com credenciais válidas → ChatView ✅
+- Bug de sessão identificado → resolvido na Parte 2.5
 
-**Etapa 2.2 — Conectar `LoginView` ao `LoginViewModel`**
-- [ ] Adicionar `@StateObject private var viewModel = LoginViewModel()`
-- [ ] Bindings: `$viewModel.email` e `$viewModel.password`
-- [ ] Botão Login chama `viewModel.signIn()`
-- [ ] Mostrar `errorMessage` (igual ao RegisterView)
-- [ ] Navegação assíncrona para ChatView (mesmo padrão do RegisterView)
-- [ ] Usar API correta do `onChange(of:)`: `{ _, isSuccessful in ... }`
+---
 
-**Verificação da Parte 2:**
-- Login com usuário existente → navega para ChatView
-- Login com senha errada → exibe erro
+### PARTE 2.5 — Gerenciamento de Sessão ✅ CONCLUÍDA
+
+**Solução adotada:** encerrar sessão automaticamente toda vez que o app vai para background, usando `@Environment(\.scenePhase)` no `FlashChatApp.swift`. Quando `scenePhase == .background`, chama `Amplify.Auth.signOut()` de forma assíncrona.
+
+**Motivação para essa abordagem:** solução mais simples que verificar sessão ao inicializar. O app sempre começa na WelcomeView e o usuário faz login a cada abertura. Adequada para o estágio atual do projeto.
+
+- [x] `@Environment(\.scenePhase) var scenePhase` adicionado ao `FlashChatApp`
+- [x] `.onChange(of: scenePhase)` no `WindowGroup` → signOut quando `.background`
+- Login após reabrir o app → funciona sem erro `invalidState` ✅
 
 ---
 
@@ -443,11 +481,15 @@ O `FlashChatApp.swift` só inicializa o `AWSCognitoAuthPlugin`. Quando implement
 try Amplify.add(plugin: AWSAPIPlugin())
 ```
 
-### Estado atual confirmado (19/05/2026)
-- Registro + confirmação por email: **funcionando** ✅ (com Gen 2)
-- `LoginView`: campos prontos visualmente, mas botão tem `TODO` — sem `LoginViewModel`
+### Estado atual confirmado (22/05/2026)
+- Registro + confirmação por email: **funcionando** ✅
+- Login com credenciais válidas: **funcionando** ✅
+- `LoginViewModel` + `LoginView` conectada: **concluído** ✅
+- Gerenciamento de sessão (scenePhase signOut): **concluído** ✅
+- `Constants.swift`: `FStore` renomeado para `Messages`, `collectionName` → `modelName` ✅
 - `ChatView`: apenas `Text("ChatView")` — placeholder
 - Amplify Gen 2 + SPM: **migração concluída** ✅
+- **Próxima tarefa**: Parte 3, Etapa 3.1 — criar `Message.swift`
 
 ---
 
@@ -461,13 +503,13 @@ try Amplify.add(plugin: AWSAPIPlugin())
 **Telas (Views SwiftUI):**
 - [x] WelcomeView - Tela inicial com logo e botões Register/Login
 - [x] RegisterView - Tela de cadastro (email + senha) + Alert de confirmação + navegação assíncrona
-- [x] LoginView - Tela de login (email + senha) - estrutura básica criada
+- [x] LoginView - Tela de login completa com LoginViewModel conectado
 - [⏳] ChatView - Estrutura básica criada (precisa implementação completa)
 
 **ViewModels:**
 - [x] WelcomeViewModel - Animação do título e navegação
 - [x] RegisterViewModel - Lógica completa de registro e confirmação com AWS Cognito
-- [ ] LoginViewModel - Lógica de autenticação com AWS Cognito
+- [x] LoginViewModel - Lógica de autenticação com AWS Cognito
 - [ ] ChatViewModel - Lógica de envio/recebimento de mensagens
 
 **Services:**
@@ -507,4 +549,4 @@ try Amplify.add(plugin: AWSAPIPlugin())
 
 ---
 
-_Última atualização: 2026-05-19 (Parte 1 concluída — migração Amplify Gen 2 + SPM completa e testada — próximo passo: LoginViewModel)_
+_Última atualização: 2026-05-22 (Partes 2 e 2.5 concluídas — próxima tarefa: Parte 3, Etapa 3.1 — criar `Message.swift`)_
