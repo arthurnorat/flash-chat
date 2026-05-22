@@ -11,10 +11,19 @@ import AWSCognitoAuthPlugin
 
 @main
 struct FlashChatApp: App {
+	@Environment(\.scenePhase) var scenePhase
+
 	var body: some Scene {
 		WindowGroup {
 			NavigationStack {
 				WelcomeView()
+			}
+		}
+		.onChange(of: scenePhase) { _, phase in
+			if phase == .background {
+				Task {
+					try? await Amplify.Auth.signOut()
+				}
 			}
 		}
 	}
