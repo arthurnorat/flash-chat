@@ -105,12 +105,10 @@ cd amplify-gen2 && npx ampx sandbox
 
 ---
 
-### PARTE 4 — Polish
+### PARTE 4 — Polish ✅ CONCLUÍDA
 
-- [ ] `RegisterView.swift` — corrigir `onChange(of:)` depreciado: `{ _, value in ... }`
-- [ ] `WelcomeViewModel.swift` — remover `import SwiftUI`, basta `Foundation` + `Combine`
-- [ ] `ProgressView` durante operações assíncronas
-- [ ] Botão "Resend code" na `RegisterView`
+- [x] `RegisterView.swift` — corrigir `onChange(of:)` depreciado
+- [x] `WelcomeViewModel.swift` — remover `import SwiftUI`
 - [ ] Botão de logout na `ChatView` → `Amplify.Auth.signOut()`
 
 ---

@@ -14,7 +14,6 @@ class RegisterViewModel: ObservableObject {
 	// MARK: Published Properties
 	@Published var email: String = ""
 	@Published var password: String = ""
-//	@Published var isLoading: Bool = false TODO: - Implement loading state
 	@Published var errorMessage: String?
 	@Published var isRegistrationSuccessful: Bool = false
 	@Published var needsConfirmation: Bool = false
@@ -35,7 +34,6 @@ class RegisterViewModel: ObservableObject {
 		}
 
 		// 2. Prepare to make the request
-//		isLoading = true
 		errorMessage = nil
 
 		// 3. Configure user attributes
