@@ -5,7 +5,6 @@
 //  Created by Arthur Norat on 20/10/25.
 //
 
-import SwiftUI
 import Combine
 import Amplify
 
