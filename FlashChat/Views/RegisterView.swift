@@ -63,13 +63,13 @@ struct RegisterView: View {
 				onLogOut()
 			})
 		}
-		.onChange(of: viewModel.isRegistrationSuccessful) { isSuccessful in
-			if isSuccessful {
+		.onChange(of: viewModel.isRegistrationSuccessful) {
+			if viewModel.isRegistrationSuccessful {
 				navigateToChatView = true
 			}
 		}
-		.onChange(of: viewModel.needsConfirmation) { needsConfirmation in
-			if needsConfirmation {
+		.onChange(of: viewModel.needsConfirmation) {
+			if viewModel.needsConfirmation {
 				showConfirmationAlert = true
 			}
 		}
