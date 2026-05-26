@@ -104,20 +104,25 @@ struct MessageBubble: View {
                 Spacer(minLength: 60)
             }
 
-            Text(message.body)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .background(
-                    isCurrentUser
-                        ? Color(K.BrandColors.lightPurple)
-                        : Color(K.BrandColors.purple)
-                )
-                .foregroundColor(
-                    isCurrentUser
-                        ? Color(K.BrandColors.purple)
-                        : Color(K.BrandColors.lightPurple)
-                )
-                .cornerRadius(18)
+            VStack(alignment: isCurrentUser ? .trailing : .leading, spacing: 2) {
+                Text(message.body)
+                Text(message.timestamp, format: .dateTime.hour().minute())
+                    .font(.caption2)
+                    .opacity(0.7)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(
+                isCurrentUser
+                    ? Color(K.BrandColors.lightPurple)
+                    : Color(K.BrandColors.purple)
+            )
+            .foregroundColor(
+                isCurrentUser
+                    ? Color(K.BrandColors.purple)
+                    : Color(K.BrandColors.lightPurple)
+            )
+            .cornerRadius(18)
 
             if isCurrentUser {
                 Image(K.rightImageView)

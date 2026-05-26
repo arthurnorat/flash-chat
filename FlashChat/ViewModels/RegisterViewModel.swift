@@ -7,6 +7,7 @@
 
 import Combine
 import Amplify
+import Foundation
 
 class RegisterViewModel: ObservableObject {
 	
