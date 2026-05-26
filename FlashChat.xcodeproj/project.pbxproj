@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1BC19978E7428A942FDD7482 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = D6741C28E72850DD28EF0D43 /* amplifyconfiguration.json */; };
 		AF004C3D57D61611BEF53A20 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BA198CCB4666F4725A8E6A4 /* awsconfiguration.json */; };
+		E06D368A2FC5E1D200CA04BB /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = E06D36892FC5E1D200CA04BB /* AWSAPIPlugin */; };
 		E0AF32A22FBCD47F00C13D1F /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = E0AF32A12FBCD47F00C13D1F /* AWSCognitoAuthPlugin */; };
 		E0AF32A42FBCD47F00C13D1F /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = E0AF32A32FBCD47F00C13D1F /* Amplify */; };
 		E0F86B452E9A874800BFD275 /* CLAUDE.md in Resources */ = {isa = PBXBuildFile; fileRef = E0F86B442E9A874800BFD275 /* CLAUDE.md */; };
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E06D368A2FC5E1D200CA04BB /* AWSAPIPlugin in Frameworks */,
 				E0AF32A22FBCD47F00C13D1F /* AWSCognitoAuthPlugin in Frameworks */,
 				E0AF32A42FBCD47F00C13D1F /* Amplify in Frameworks */,
 			);
@@ -52,6 +54,13 @@
 			name = AmplifyConfig;
 			sourceTree = "<group>";
 		};
+		E06D36882FC5E1D200CA04BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E0EB2E2F2E96FC57008FFDCC = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +69,7 @@
 				E0F86B442E9A874800BFD275 /* CLAUDE.md */,
 				E0AAC11B2FC1060000501728 /* README.md */,
 				053E4B4E7A0791E989A8D850 /* AmplifyConfig */,
+				E06D36882FC5E1D200CA04BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -389,6 +399,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E06D36892FC5E1D200CA04BB /* AWSAPIPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0AF32A02FBCD47F00C13D1F /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = AWSAPIPlugin;
+		};
 		E0AF32A12FBCD47F00C13D1F /* AWSCognitoAuthPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E0AF32A02FBCD47F00C13D1F /* XCRemoteSwiftPackageReference "amplify-swift" */;

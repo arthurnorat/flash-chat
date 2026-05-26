@@ -8,6 +8,7 @@
 import SwiftUI
 import Amplify
 import AWSCognitoAuthPlugin
+import AWSAPIPlugin
 
 @main
 struct FlashChatApp: App {
@@ -35,6 +36,7 @@ struct FlashChatApp: App {
 	func configureAmplify() {
 		do {
 			try Amplify.add(plugin: AWSCognitoAuthPlugin())
+			try Amplify.add(plugin: AWSAPIPlugin())
 			try Amplify.configure(with: .amplifyOutputs)
 			print("Amplify configured with auth plugin")
 		} catch {
