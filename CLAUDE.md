@@ -82,8 +82,10 @@ cd amplify-gen2 && npx ampx sandbox
 - Registro com confirmação por email (Alert + código 6 dígitos): **funcionando** ✅
 - Login com Cognito: **funcionando** ✅
 - Gerenciamento de sessão (signOut no background): **funcionando** ✅
-- ChatView: apenas placeholder `Text("ChatView")`
-- **Próxima tarefa**: Parte 3, Etapa 3.1 — criar `Message.swift`
+- ChatView: implementada com bolhas, barra de input e logout ✅
+- Envio e recebimento de mensagens em tempo real (AppSync): **funcionando** ✅
+- Logout retorna para WelcomeView: **funcionando** ✅
+- **Próxima tarefa**: Parte 4 — Polish
 
 ---
 
@@ -95,39 +97,11 @@ cd amplify-gen2 && npx ampx sandbox
 
 ---
 
-### PARTE 3 — Chat (Model + AppSync + ChatView)
+### PARTE 3 — Chat (Model + AppSync + ChatView) ✅ CONCLUÍDA
 
-**Etapa 3.1 — `Message.swift`**
-- [ ] Campos: `id: String`, `sender: String`, `body: String`, `timestamp: Date`
-- [ ] Protocolo `Identifiable` para uso em `List`
-
-**Etapa 3.2 — AppSync no backend Gen 2**
-- [ ] Adicionar `defineData` ao `amplify-gen2/amplify/backend.ts`
-- [ ] Schema GraphQL com modelo `Message` (auth: usuários autenticados podem criar e ler)
-- [ ] `npx ampx sandbox` → substituir `amplify_outputs.json` no projeto iOS
-- [ ] Xcode: adicionar target `AWSAPIPlugin` via SPM
-- [ ] `FlashChatApp.swift`: `try Amplify.add(plugin: AWSAPIPlugin())`
-
-**Etapa 3.3 — `MessageService.swift`**
-- [ ] `sendMessage(body:sender:)` — mutation via `Amplify.API.mutate()`
-- [ ] `observeMessages()` — subscription via `Amplify.API.subscribe()` (tempo real)
-
-**Etapa 3.4 — `ChatViewModel.swift`**
-- [ ] `@Published var messages: [Message]` e `@Published var newMessageText: String`
-- [ ] `sendMessage()` → chama `MessageService`
-- [ ] `loadMessages()` → carrega histórico
-- [ ] Subscription para mensagens em tempo real
-- [ ] Obter email do usuário: `Amplify.Auth.getCurrentUser()`
-
-**Etapa 3.5 — `ChatView.swift`**
-- [ ] `ScrollView` com lista de mensagens
-- [ ] Bubble direita (MeAvatar, azul) / esquerda (YouAvatar, roxo)
-- [ ] Barra inferior: `TextField` + botão enviar
-- [ ] `.onAppear` → `viewModel.loadMessages()`
-
-**Verificação:**
-- Enviar mensagem → aparece na lista ✅
-- Dois simuladores: mensagem de um aparece no outro em tempo real ✅
+- Envio e recebimento em tempo real via AppSync subscription ✅
+- Bolhas com MeAvatar (direita) e YouAvatar (esquerda) ✅
+- Logout retorna para WelcomeView via callback chain ✅
 
 ---
 

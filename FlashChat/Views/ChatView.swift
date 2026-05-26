@@ -38,23 +38,26 @@ struct ChatView: View {
     // MARK: - Messages List
 
     private var messagesList: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                LazyVStack(spacing: 8) {
-                    ForEach(viewModel.messages) { message in
-                        MessageBubble(
-                            message: message,
-                            isCurrentUser: message.sender == viewModel.currentUserEmail
-                        )
-                        .id(message.id)
+        GeometryReader { geo in
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(spacing: 8) {
+                        ForEach(viewModel.messages) { message in
+                            MessageBubble(
+                                message: message,
+                                isCurrentUser: message.sender == viewModel.currentUserEmail
+                            )
+                            .id(message.id)
+                        }
                     }
+                    .padding()
+                    .frame(minHeight: geo.size.height, alignment: .bottom)
                 }
-                .padding()
-            }
-            .onChange(of: viewModel.messages.count) { _, _ in
-                if let last = viewModel.messages.last {
-                    withAnimation {
-                        proxy.scrollTo(last.id, anchor: .bottom)
+                .onChange(of: viewModel.messages.count) { _, _ in
+                    if let last = viewModel.messages.last {
+                        withAnimation {
+                            proxy.scrollTo(last.id, anchor: .bottom)
+                        }
                     }
                 }
             }
