@@ -25,6 +25,7 @@ class LoginViewModel: ObservableObject {
             return
         }
 
+        isLoginSuccessful = false
         errorMessage = nil
 
         Task {

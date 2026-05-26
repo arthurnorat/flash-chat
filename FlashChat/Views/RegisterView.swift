@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-	
+	let onLogOut: () -> Void
+
 	@StateObject private var viewModel = RegisterViewModel()
 	@State private var navigateToChatView: Bool = false
 	@State private var showConfirmationAlert: Bool = false
@@ -57,7 +58,10 @@ struct RegisterView: View {
 		.background(Color("BrandLightBlue"))
 		.ignoresSafeArea()
 		.navigationDestination(isPresented: $navigateToChatView) {
-			ChatView()
+			ChatView(onLogOut: {
+				navigateToChatView = false
+				onLogOut()
+			})
 		}
 		.onChange(of: viewModel.isRegistrationSuccessful) { isSuccessful in
 			if isSuccessful {
@@ -84,5 +88,5 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView()
+    RegisterView(onLogOut: {})
 }

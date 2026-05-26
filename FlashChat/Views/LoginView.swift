@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    let onLogOut: () -> Void
 
     @StateObject private var viewModel = LoginViewModel()
     @State private var navigateToChatView: Bool = false
@@ -56,7 +57,10 @@ struct LoginView: View {
         .background(Color("BrandLightBlue"))
         .ignoresSafeArea()
         .navigationDestination(isPresented: $navigateToChatView) {
-            ChatView()
+            ChatView(onLogOut: {
+                navigateToChatView = false
+                onLogOut()
+            })
         }
         .onChange(of: viewModel.isLoginSuccessful) { _, isSuccessful in
             if isSuccessful {
@@ -67,5 +71,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(onLogOut: {})
 }

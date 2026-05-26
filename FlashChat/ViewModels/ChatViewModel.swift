@@ -11,7 +11,7 @@ class ChatViewModel: ObservableObject {
 
     private let messageService = MessageService()
     private var subscriptionTask: Task<Void, Never>?
-    private var currentUserEmail: String = ""
+    var currentUserEmail: String = ""
 
     // MARK: Public Methods
 
